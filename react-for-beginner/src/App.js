@@ -1,28 +1,30 @@
 import { useEffect, useState } from "react";
-import Button from "./Button";
+
+function Hello() {
+
+}
+
 
 function App() {
-  const [counter,setValue] = useState(0);
-  const [keyword,setKeyword] = useState("");
-  const onClick = () => setValue((prev)=>prev+1);
-  const onChange = (event) => setKeyword(event.target.value);
-  useEffect(() =>{
-    console.log("CALL THE API");
+ const [toDo,setTodo] = useState("");
+ const [toDos,setTodos] = useState([]);
+ const onChange = (event) => setTodo(event.target.value);
+ const onSubmit = (event) => {
+  event.preventDefault();
+  if (toDo ===""){
+    return;
+  }
+  setTodos(currentArray => [toDo,...currentArray]);
+  setTodo("");
+};
+console.log(toDos);
 
-  },[]);
-  useEffect(() =>{
-    console.log("Search For ",keyword);
-
-  },[keyword]);
   return (
     <div>
-      <input 
-        onChange={onChange}
-        value={keyword}
-        type="text"
-        placeholder="Search"></input>
-      <h1>{counter}</h1>
-      <button onClick={onClick}>sex</button>
+      <form onSubmit={onSubmit}>
+        <input onChange={onChange} type="text" placeholder="wirte"/>
+        <button>Add to Do</button>
+      </form>
     </div> 
   );
 }
