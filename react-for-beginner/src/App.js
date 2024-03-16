@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
 
-function Hello() {
-
-}
-
 
 function App() {
  const [toDo,setTodo] = useState("");
@@ -14,17 +10,21 @@ function App() {
   if (toDo ===""){
     return;
   }
-  setTodos(currentArray => [toDo,...currentArray]);
+  setTodos(currentArray => [...currentArray,toDo]);
   setTodo("");
 };
 console.log(toDos);
 
   return (
     <div>
+      <h1>My To Dos ({toDos.length})</h1>
       <form onSubmit={onSubmit}>
         <input onChange={onChange} type="text" placeholder="wirte"/>
         <button>Add to Do</button>
       </form>
+      <hr />
+      {toDos.map((item,index) => 
+      <li key={index}>{item}</li>)}
     </div> 
   );
 }
